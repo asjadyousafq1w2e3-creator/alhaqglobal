@@ -32,8 +32,8 @@ const config: Config = {
         surface: "var(--surface)",
       },
       fontFamily: {
-        display: '"Archivo", system-ui, sans-serif',
-        sans: '"Manrope", system-ui, sans-serif',
+        display: ["var(--font-display-next)", '"Archivo"', "system-ui", "sans-serif"],
+        sans: ["var(--font-sans-next)", '"Manrope"', "system-ui", "sans-serif"],
       },
       borderRadius: {
         sm: "calc(var(--radius) - 4px)",

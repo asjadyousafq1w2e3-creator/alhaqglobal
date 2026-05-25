@@ -53,7 +53,7 @@
 
 @layer base {
   * {
-    border-color: var(--color-border);
+    border-color: var(--border);
   }
 
   html {
@@ -61,9 +61,9 @@
   }
 
   body {
-    background-color: var(--color-background);
+    background-color: var(--background);
     background-image: linear-gradient(180deg, rgb(205 4 11 / 0.03), transparent 220px);
-    color: var(--color-foreground);
+    color: var(--foreground);
     font-family: var(--font-sans);
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     -webkit-font-smoothing: antialiased;
@@ -82,13 +82,13 @@
 
   ::selection {
     background: rgb(205 4 11 / 0.16);
-    color: var(--color-foreground);
+    color: var(--foreground);
   }
 }
 
 @layer utilities {
   .gradient-text {
-    color: var(--color-primary);
+    color: var(--primary);
   }
   .bg-gradient-primary {
     background: var(--gradient-primary);
@@ -126,7 +126,7 @@
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
-    color: var(--color-primary);
+    color: var(--primary);
     font-size: 0.72rem;
     font-weight: 700;
     letter-spacing: 0.28em;
@@ -137,7 +137,7 @@
     content: "";
     width: 2.5rem;
     height: 1px;
-    background: var(--color-primary);
+    background: var(--primary);
   }
 
   .screen-panel {
