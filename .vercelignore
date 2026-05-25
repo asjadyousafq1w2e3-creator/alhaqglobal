@@ -1,0 +1,39 @@
+# Dependencies
+node_modules
+/.pnp
+.pnp.js
+
+# Testing
+/coverage
+
+# Miscellaneous
+.DS_Store
+*.pem
+.env.local
+.env.*.local
+.wrangler
+.lovable
+
+# Build outputs (Vercel will create its own)
+/dist
+
+# Git
+.git
+.gitignore
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Lock files (Vercel will install dependencies)
+bun.lock
+package-lock.json
