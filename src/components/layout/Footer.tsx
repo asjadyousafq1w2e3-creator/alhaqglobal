@@ -1,5 +1,7 @@
-import { Link } from "@tanstack/react-router";
-import { Mail, MapPin, Linkedin, Github, Twitter } from "lucide-react";
+'use client';
+
+import Link from 'next/link';
+import { Mail, MapPin, Linkedin, Github, Twitter } from 'lucide-react';
 
 export function Footer() {
   return (
@@ -38,22 +40,22 @@ export function Footer() {
           </h4>
           <ul className="space-y-3 text-sm text-background/70">
             <li>
-              <Link to="/about" className="transition hover:text-primary">
+              <Link href="/about" className="transition hover:text-primary">
                 About
               </Link>
             </li>
             <li>
-              <Link to="/projects" className="transition hover:text-primary">
+              <Link href="/projects" className="transition hover:text-primary">
                 Projects
               </Link>
             </li>
             <li>
-              <Link to="/services" className="transition hover:text-primary">
+              <Link href="/services" className="transition hover:text-primary">
                 Services
               </Link>
             </li>
             <li>
-              <Link to="/contact" className="transition hover:text-primary">
+              <Link href="/contact" className="transition hover:text-primary">
                 Contact
               </Link>
             </li>
