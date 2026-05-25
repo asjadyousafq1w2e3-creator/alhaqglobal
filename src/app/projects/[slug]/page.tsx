@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { useParams } from 'next/navigation';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
-import { Reveal } from '@/components/Reveal';
-import { caseStudies } from '@/data/caseStudies';
+import Link from "next/link";
+import { useParams } from "next/navigation";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import { Reveal } from "@/components/Reveal";
+import { caseStudies } from "@/data/caseStudies";
 
 export default function ProjectDetailPage() {
   const params = useParams();
@@ -66,9 +66,9 @@ export default function ProjectDetailPage() {
 
       <section className="mx-auto max-w-3xl px-6 py-20 space-y-14">
         {[
-          { h: 'The challenge', b: study.challenge },
-          { h: 'Our solution', b: study.solution },
-          { h: 'The outcome', b: study.outcome },
+          { h: "The challenge", b: study.challenge },
+          { h: "Our solution", b: study.solution },
+          { h: "The outcome", b: study.outcome },
         ].map((s) => (
           <Reveal key={s.h}>
             <div>

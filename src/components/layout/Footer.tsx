@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { Mail, MapPin, Linkedin, Github, Twitter } from 'lucide-react';
+import Link from "next/link";
+import { Mail, MapPin, Linkedin, Github, Twitter } from "lucide-react";
 
 export function Footer() {
   return (

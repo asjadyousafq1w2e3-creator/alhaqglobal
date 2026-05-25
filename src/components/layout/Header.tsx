@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { Menu, X } from "lucide-react";
 
 const links = [
-  { href: '/', label: 'Home' },
-  { href: '/services', label: 'Services' },
-  { href: '/projects', label: 'Projects' },
-  { href: '/about', label: 'About' },
-  { href: '/contact', label: 'Contact' },
+  { href: "/", label: "Home" },
+  { href: "/services", label: "Services" },
+  { href: "/projects", label: "Projects" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
 ] as const;
 
 export function Header() {
@@ -21,19 +21,19 @@ export function Header() {
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const isActive = (href: string) => {
-    if (href === '/') return pathname === '/';
+    if (href === "/") return pathname === "/";
     return pathname.startsWith(href);
   };
 
   return (
     <header
       className={`fixed top-0 inset-x-0 z-40 transition-all duration-300 ${
-        scrolled ? 'glass shadow-soft border-b border-border/80' : 'bg-background/80'
+        scrolled ? "glass shadow-soft border-b border-border/80" : "bg-background/80"
       }`}
     >
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
@@ -58,8 +58,8 @@ export function Header() {
               href={l.href}
               className={`relative py-2 text-[0.72rem] font-semibold uppercase tracking-[0.2em] transition-colors after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-full after:origin-left after:bg-primary after:transition-transform ${
                 isActive(l.href)
-                  ? 'text-foreground after:scale-x-100'
-                  : 'text-muted-foreground hover:text-foreground after:scale-x-0'
+                  ? "text-foreground after:scale-x-100"
+                  : "text-muted-foreground hover:text-foreground after:scale-x-0"
               }`}
             >
               {l.label}
@@ -95,8 +95,8 @@ export function Header() {
                 onClick={() => setOpen(false)}
                 className={`rounded-xl px-3 py-3 text-sm font-semibold uppercase tracking-[0.16em] ${
                   isActive(l.href)
-                    ? 'bg-secondary text-foreground'
-                    : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
+                    ? "bg-secondary text-foreground"
+                    : "text-muted-foreground hover:bg-secondary hover:text-foreground"
                 }`}
               >
                 {l.label}

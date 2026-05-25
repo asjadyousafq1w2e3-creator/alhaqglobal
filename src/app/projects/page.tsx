@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
-import { Reveal } from '@/components/Reveal';
-import { caseStudies } from '@/data/caseStudies';
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { Reveal } from "@/components/Reveal";
+import { caseStudies } from "@/data/caseStudies";
 
 export default function ProjectsPage() {
   return (

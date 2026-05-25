@@ -1,26 +1,26 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { Mail, MapPin, Clock, Loader2, CheckCircle2, type LucideIcon } from 'lucide-react';
-import { toast } from 'sonner';
-import { Reveal } from '@/components/Reveal';
+import { useState } from "react";
+import { Mail, MapPin, Clock, Loader2, CheckCircle2, type LucideIcon } from "lucide-react";
+import { toast } from "sonner";
+import { Reveal } from "@/components/Reveal";
 
 const faqs = [
   {
-    q: 'How long does a typical project take?',
-    a: 'Marketing sites: 3-6 weeks. Web apps / SaaS MVPs: 10-16 weeks. Larger platforms: 12 weeks and up. We will give you a clear estimate after the discovery call.',
+    q: "How long does a typical project take?",
+    a: "Marketing sites: 3-6 weeks. Web apps / SaaS MVPs: 10-16 weeks. Larger platforms: 12 weeks and up. We will give you a clear estimate after the discovery call.",
   },
   {
-    q: 'What does it cost?',
-    a: 'Every project is scoped individually based on goals, features and timeline. After our free discovery call we will share a clear estimate and proposal.',
+    q: "What does it cost?",
+    a: "Every project is scoped individually based on goals, features and timeline. After our free discovery call we will share a clear estimate and proposal.",
   },
   {
-    q: 'Do you work with existing teams?',
-    a: 'Yes. We regularly embed with in-house teams, hand off documentation, or operate independently - whatever suits your setup.',
+    q: "Do you work with existing teams?",
+    a: "Yes. We regularly embed with in-house teams, hand off documentation, or operate independently - whatever suits your setup.",
   },
   {
-    q: 'Where are you based?',
-    a: 'We are remote-first with team members worldwide. We work async and overlap with your timezone when needed.',
+    q: "Where are you based?",
+    a: "We are remote-first with team members worldwide. We work async and overlap with your timezone when needed.",
   },
 ];
 
@@ -33,28 +33,28 @@ export default function ContactPage() {
     const fd = new FormData(e.currentTarget);
     setLoading(true);
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: String(fd.get('name') || ''),
-          email: String(fd.get('email') || ''),
-          company: String(fd.get('company') || ''),
-          service: String(fd.get('service') || ''),
-          message: String(fd.get('message') || ''),
+          name: String(fd.get("name") || ""),
+          email: String(fd.get("email") || ""),
+          company: String(fd.get("company") || ""),
+          service: String(fd.get("service") || ""),
+          message: String(fd.get("message") || ""),
         }),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to send message');
+        throw new Error("Failed to send message");
       }
 
       setDone(true);
-      toast.success('Message sent! We will be in touch within one business day.');
+      toast.success("Message sent! We will be in touch within one business day.");
       (e.target as HTMLFormElement).reset();
     } catch (err) {
       console.error(err);
-      toast.error(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
+      toast.error(err instanceof Error ? err.message : "Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -121,7 +121,7 @@ export default function ContactPage() {
                   <CheckCircle2 size={16} /> Message sent
                 </>
               ) : (
-                'Send message ->'
+                "Send message ->"
               )}
             </button>
           </form>
@@ -163,7 +163,7 @@ export default function ContactPage() {
 function Field({
   label,
   name,
-  type = 'text',
+  type = "text",
   required,
   placeholder,
 }: {

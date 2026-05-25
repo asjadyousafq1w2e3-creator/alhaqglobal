@@ -1,6 +1,7 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
+import Image from "next/image";
+import Link from "next/link";
 import {
   motion,
   type MotionValue,
@@ -8,9 +9,9 @@ import {
   useReducedMotion,
   useScroll,
   useTransform,
-} from 'framer-motion';
-import { ArrowRight, ArrowUpRight, Check, Cloud } from 'lucide-react';
-import { useRef, useState } from 'react';
+} from "framer-motion";
+import { ArrowRight, ArrowUpRight, Check, Cloud } from "lucide-react";
+import { useRef, useState } from "react";
 import {
   siCloudflare,
   siNextdotjs,
@@ -24,13 +25,13 @@ import {
   siTypescript,
   siWordpress,
   type SimpleIcon,
-} from 'simple-icons';
-import heroResponsiveDevices from '@/assets/hero-responsive-devices.png';
-import { Reveal } from '@/components/Reveal';
-import ServiceFlipCard from '@/components/ui/flip-card';
-import { caseStudies, type CaseStudy } from '@/data/caseStudies';
-import { services } from '@/data/services';
-import { testimonials } from '@/data/testimonials';
+} from "simple-icons";
+import heroResponsiveDevices from "@/assets/hero-responsive-devices.png";
+import { Reveal } from "@/components/Reveal";
+import ServiceFlipCard from "@/components/ui/flip-card";
+import { caseStudies, type CaseStudy } from "@/data/caseStudies";
+import { services } from "@/data/services";
+import { testimonials } from "@/data/testimonials";
 
 type TechLogo = {
   name: string;
@@ -39,32 +40,32 @@ type TechLogo = {
 };
 
 const stats = [
-  { value: '120+', label: 'Projects shipped' },
-  { value: '8 yrs', label: 'Building software' },
-  { value: '99.98%', label: 'Average uptime' },
-  { value: '40+', label: 'Happy clients' },
+  { value: "120+", label: "Projects shipped" },
+  { value: "8 yrs", label: "Building software" },
+  { value: "99.98%", label: "Average uptime" },
+  { value: "40+", label: "Happy clients" },
 ];
 
 const techLogos: TechLogo[] = [
-  { name: 'React', icon: siReact },
-  { name: 'TypeScript', icon: siTypescript },
-  { name: 'Next.js', icon: siNextdotjs },
-  { name: 'Node.js', icon: siNodedotjs },
-  { name: 'Postgres', icon: siPostgresql },
-  { name: 'AWS', color: '#FF9900' },
-  { name: 'Shopify', icon: siShopify },
-  { name: 'WordPress', icon: siWordpress },
-  { name: 'Tailwind', icon: siTailwindcss },
-  { name: 'Stripe', icon: siStripe },
-  { name: 'Supabase', icon: siSupabase },
-  { name: 'Cloudflare', icon: siCloudflare },
+  { name: "React", icon: siReact },
+  { name: "TypeScript", icon: siTypescript },
+  { name: "Next.js", icon: siNextdotjs },
+  { name: "Node.js", icon: siNodedotjs },
+  { name: "Postgres", icon: siPostgresql },
+  { name: "AWS", color: "#FF9900" },
+  { name: "Shopify", icon: siShopify },
+  { name: "WordPress", icon: siWordpress },
+  { name: "Tailwind", icon: siTailwindcss },
+  { name: "Stripe", icon: siStripe },
+  { name: "Supabase", icon: siSupabase },
+  { name: "Cloudflare", icon: siCloudflare },
 ];
 const marqueeTechLogos = [...techLogos, ...techLogos];
 
 const heroSignals = [
-  'Desktop and mobile first',
-  'Fast, accessible interfaces',
-  'Built for scale and handover',
+  "Desktop and mobile first",
+  "Fast, accessible interfaces",
+  "Built for scale and handover",
 ];
 
 const featuredCaseStudies = caseStudies.slice(0, 4);
@@ -73,7 +74,7 @@ export default function HomePage() {
   const heroRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
-    offset: ['start start', 'end start'],
+    offset: ["start start", "end start"],
   });
   const heroCopyY = useTransform(scrollYProgress, [0, 1], [0, 70]);
   const heroPreviewY = useTransform(scrollYProgress, [0, 1], [0, -45]);
@@ -112,7 +113,7 @@ export default function HomePage() {
                 transition={{ duration: 0.7, delay: 0.1 }}
                 className="mt-5 max-w-5xl text-4xl font-display font-semibold tracking-tight md:text-5xl lg:text-[4.25rem]"
               >
-                Professional websites, software, and automation{' '}
+                Professional websites, software, and automation{" "}
                 <span className="gradient-text">built to perform.</span>
               </motion.h1>
 
@@ -197,7 +198,7 @@ export default function HomePage() {
                     <div className="relative mt-6">
                       <motion.div
                         animate={{ y: [0, -8, 0] }}
-                        transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+                        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
                         className="rounded-[2rem] border border-white/10 bg-[#171717] p-3 shadow-[0_30px_60px_rgba(0,0,0,0.3)] sm:p-4"
                       >
                         <div className="screen-panel overflow-hidden rounded-[1.6rem] border border-black/10 p-3 sm:p-4">
@@ -214,10 +215,11 @@ export default function HomePage() {
                           </div>
 
                           <div className="overflow-hidden rounded-[1.35rem] border border-black/8 bg-white">
-                            <img
+                            <Image
                               src={heroResponsiveDevices}
                               alt="Laptop and mobile phone showing a responsive business software dashboard."
-                              className="block w-full object-cover"
+                              className="block h-auto w-full object-cover"
+                              priority
                             />
                           </div>
                         </div>
@@ -394,9 +396,9 @@ export default function HomePage() {
               <div>
                 <ul className="grid gap-3 text-sm text-background/78">
                   {[
-                    'Free 30-minute discovery call',
-                    'Clear estimate and realistic timeline',
-                    'Straightforward advice, no pressure',
+                    "Free 30-minute discovery call",
+                    "Clear estimate and realistic timeline",
+                    "Straightforward advice, no pressure",
                   ].map((x) => (
                     <li key={x} className="flex items-center gap-3">
                       <Check size={16} className="text-primary" /> {x}
@@ -438,10 +440,10 @@ function BrandIcon({ icon, color }: TechLogo) {
 
 function MobileCaseStudyStack({ studies }: { studies: CaseStudy[] }) {
   const sectionRef = useRef<HTMLElement>(null);
-  const prefersReducedMotion = useReducedMotion();
+  const prefersReducedMotion = useReducedMotion() ?? false;
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start start', 'end end'],
+    offset: ["start start", "end end"],
   });
 
   return (
@@ -491,10 +493,10 @@ function MobileCaseStudyStack({ studies }: { studies: CaseStudy[] }) {
 
 function DesktopCaseStudyStack({ studies }: { studies: CaseStudy[] }) {
   const sectionRef = useRef<HTMLElement>(null);
-  const prefersReducedMotion = useReducedMotion();
+  const prefersReducedMotion = useReducedMotion() ?? false;
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start start', 'end end'],
+    offset: ["start start", "end end"],
   });
 
   return (
@@ -565,20 +567,20 @@ function CaseStudyStoryCard({
   return (
     <Link
       href={`/projects/${study.slug}`}
-      data-cursor={mobile ? undefined : 'focus'}
+      data-cursor={mobile ? undefined : "focus"}
       className={[
-        'group overflow-hidden rounded-[1.9rem] border border-border bg-card shadow-card',
-        interactive ? 'pointer-events-auto' : 'pointer-events-none',
+        "group overflow-hidden rounded-[1.9rem] border border-border bg-card shadow-card",
+        interactive ? "pointer-events-auto" : "pointer-events-none",
         mobile
-          ? 'flex h-full w-full flex-col'
-          : 'grid h-[clamp(31rem,66vh,36rem)] w-full max-w-[54rem] grid-cols-[minmax(0,1.08fr)_minmax(300px,0.92fr)]',
-      ].join(' ')}
+          ? "flex h-full w-full flex-col"
+          : "grid h-[clamp(31rem,66vh,36rem)] w-full max-w-[54rem] grid-cols-[minmax(0,1.08fr)_minmax(300px,0.92fr)]",
+      ].join(" ")}
     >
       <CaseStudyVisual study={study} index={index} compact={mobile} />
 
       <div
-        className={['flex flex-1 flex-col justify-between', mobile ? 'p-5' : 'p-8 xl:p-10'].join(
-          ' ',
+        className={["flex flex-1 flex-col justify-between", mobile ? "p-5" : "p-8 xl:p-10"].join(
+          " ",
         )}
       >
         <div>
@@ -590,10 +592,10 @@ function CaseStudyStoryCard({
 
           <h3
             className={[
-              'font-display font-semibold leading-tight text-foreground',
-              mobile ? 'text-[1.75rem]' : 'text-[2rem] xl:text-[2.45rem]',
-              mobile ? '' : 'mt-4 max-w-md',
-            ].join(' ')}
+              "font-display font-semibold leading-tight text-foreground",
+              mobile ? "text-[1.75rem]" : "text-[2rem] xl:text-[2.45rem]",
+              mobile ? "" : "mt-4 max-w-md",
+            ].join(" ")}
           >
             {study.title}
           </h3>
@@ -607,9 +609,9 @@ function CaseStudyStoryCard({
 
         <div
           className={[
-            'border-t border-border pt-4',
-            mobile ? 'mt-5 flex justify-end' : 'mt-6 flex',
-          ].join(' ')}
+            "border-t border-border pt-4",
+            mobile ? "mt-5 flex justify-end" : "mt-6 flex",
+          ].join(" ")}
         >
           <div className="inline-flex items-center gap-2 text-sm font-semibold text-foreground transition group-hover:text-primary">
             Learn more <ArrowUpRight size={15} />
@@ -641,8 +643,8 @@ function StackedCaseStudyDeckCard({
   const prev = Math.max(0, center - step);
   const next = Math.min(1, center + step);
 
-  const entryY = mobile ? '122%' : '116%';
-  const restY = mobile ? '2.5%' : '2%';
+  const entryY = mobile ? "122%" : "116%";
+  const restY = mobile ? "2.5%" : "2%";
   const exitScale = mobile ? 0.988 : 0.982;
   const entryRotate = mobile ? 7 : 10;
   const revealPoint = Math.min(center, prev + step * 0.18);
@@ -650,7 +652,7 @@ function StackedCaseStudyDeckCard({
   const y = useTransform(
     progress,
     [prev, center, next],
-    reducedMotion ? ['0%', '0%', '0%'] : [index === 0 ? '0%' : entryY, '0%', restY],
+    reducedMotion ? ["0%", "0%", "0%"] : [index === 0 ? "0%" : entryY, "0%", restY],
     { clamp: true },
   );
   const scale = useTransform(
@@ -672,7 +674,7 @@ function StackedCaseStudyDeckCard({
     { clamp: true },
   );
 
-  useMotionValueEvent(progress, 'change', (latest) => {
+  useMotionValueEvent(progress, "change", (latest) => {
     const lowerBound = Math.max(0, center - step * 0.45);
     const upperBound = index === total - 1 ? 1.01 : center + step * 0.45;
     setInteractive(latest >= lowerBound && latest < upperBound);
@@ -701,8 +703,8 @@ function CaseStudyVisual({
     <div
       className={[
         `relative overflow-hidden border-border ${study.cover}`,
-        compact ? 'h-56 border-b' : 'h-full border-r',
-      ].join(' ')}
+        compact ? "h-56 border-b" : "h-full border-r",
+      ].join(" ")}
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.82),transparent_38%),linear-gradient(180deg,rgba(255,255,255,0.12),rgba(255,255,255,0.74))]" />
 
@@ -719,12 +721,12 @@ function CaseStudyVisual({
         </span>
       </div>
 
-      <div className={compact ? 'absolute inset-x-4 bottom-4' : 'absolute inset-x-6 bottom-6'}>
+      <div className={compact ? "absolute inset-x-4 bottom-4" : "absolute inset-x-6 bottom-6"}>
         <div
           className={[
-            'screen-panel border border-black/10',
-            compact ? 'rounded-[1.25rem] p-3.5' : 'rounded-[1.6rem] p-5',
-          ].join(' ')}
+            "screen-panel border border-black/10",
+            compact ? "rounded-[1.25rem] p-3.5" : "rounded-[1.6rem] p-5",
+          ].join(" ")}
         >
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">

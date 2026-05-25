@@ -1,35 +1,35 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { ArrowRight, Check } from 'lucide-react';
-import { Reveal } from '@/components/Reveal';
-import { services } from '@/data/services';
+import Link from "next/link";
+import { ArrowRight, Check } from "lucide-react";
+import { Reveal } from "@/components/Reveal";
+import { services } from "@/data/services";
 
 const process = [
   {
-    step: '01',
-    title: 'Discover',
+    step: "01",
+    title: "Discover",
     body: "We get deep into your business, users and goals — and define what success looks like.",
   },
   {
-    step: '02',
-    title: 'Design',
+    step: "02",
+    title: "Design",
     body: "Wireframes, prototypes, and a high-fidelity design system you'll actually want to use.",
   },
   {
-    step: '03',
-    title: 'Build',
-    body: 'Modern, scalable engineering with weekly demos and zero black boxes.',
+    step: "03",
+    title: "Build",
+    body: "Modern, scalable engineering with weekly demos and zero black boxes.",
   },
   {
-    step: '04',
-    title: 'Launch',
-    body: 'We sweat the details — performance, SEO, accessibility, analytics — before you go live.',
+    step: "04",
+    title: "Launch",
+    body: "We sweat the details — performance, SEO, accessibility, analytics — before you go live.",
   },
   {
-    step: '05',
-    title: 'Support',
-    body: 'Ongoing partnership: monitoring, iterations, new features and roadmap planning.',
+    step: "05",
+    title: "Support",
+    body: "Ongoing partnership: monitoring, iterations, new features and roadmap planning.",
   },
 ];
 

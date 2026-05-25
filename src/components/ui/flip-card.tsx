@@ -132,9 +132,10 @@ export default function ServiceFlipCard({
     >
       <div
         className={cn(
-          "relative h-full w-full [transform-style:preserve-3d] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]",
+          "relative h-full w-full [transform-style:preserve-3d] transition-transform duration-700",
           isFlipped ? "[transform:rotateY(180deg)]" : "[transform:rotateY(0deg)]",
         )}
+        style={{ transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)" }}
       >
         <div
           className={cn(

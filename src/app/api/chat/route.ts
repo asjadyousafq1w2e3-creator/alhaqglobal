@@ -17,75 +17,75 @@ Guidelines:
 export async function POST(request: Request) {
   try {
     const { messages } = (await request.json()) as {
-      messages: Array<{ role: 'user' | 'assistant'; content: string }>;
+      messages: Array<{ role: "user" | "assistant"; content: string }>;
     };
 
     if (!Array.isArray(messages) || messages.length === 0) {
-      return new Response(JSON.stringify({ error: 'messages array required' }), {
+      return new Response(JSON.stringify({ error: "messages array required" }), {
         status: 400,
-        headers: { 'Content-Type': 'application/json' },
+        headers: { "Content-Type": "application/json" },
       });
     }
 
     // basic guard: cap message count + length
     const trimmed = messages.slice(-20).map((m) => ({
       role: m.role,
-      content: String(m.content ?? '').slice(0, 2000),
+      content: String(m.content ?? "").slice(0, 2000),
     }));
 
     const apiKey = process.env.LOVABLE_API_KEY;
     if (!apiKey) {
-      return new Response(JSON.stringify({ error: 'AI not configured' }), {
+      return new Response(JSON.stringify({ error: "AI not configured" }), {
         status: 500,
-        headers: { 'Content-Type': 'application/json' },
+        headers: { "Content-Type": "application/json" },
       });
     }
 
-    const upstream = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
-      method: 'POST',
+    const upstream = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+      method: "POST",
       headers: {
         Authorization: `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: 'google/gemini-3-flash-preview',
+        model: "google/gemini-3-flash-preview",
         stream: true,
-        messages: [{ role: 'system', content: SYSTEM_PROMPT }, ...trimmed],
+        messages: [{ role: "system", content: SYSTEM_PROMPT }, ...trimmed],
       }),
     });
 
     if (!upstream.ok) {
       if (upstream.status === 429)
-        return new Response(JSON.stringify({ error: 'Rate limit' }), {
+        return new Response(JSON.stringify({ error: "Rate limit" }), {
           status: 429,
-          headers: { 'Content-Type': 'application/json' },
+          headers: { "Content-Type": "application/json" },
         });
       if (upstream.status === 402)
-        return new Response(JSON.stringify({ error: 'Credits exhausted' }), {
+        return new Response(JSON.stringify({ error: "Credits exhausted" }), {
           status: 402,
-          headers: { 'Content-Type': 'application/json' },
+          headers: { "Content-Type": "application/json" },
         });
       const text = await upstream.text();
-      console.error('AI gateway error', upstream.status, text);
-      return new Response(JSON.stringify({ error: 'AI gateway error' }), {
+      console.error("AI gateway error", upstream.status, text);
+      return new Response(JSON.stringify({ error: "AI gateway error" }), {
         status: 500,
-        headers: { 'Content-Type': 'application/json' },
+        headers: { "Content-Type": "application/json" },
       });
     }
 
     // Pass through the streaming response
     return new Response(upstream.body, {
       headers: {
-        'Content-Type': 'text/event-stream',
-        'Cache-Control': 'no-cache',
-        'Connection': 'keep-alive',
+        "Content-Type": "text/event-stream",
+        "Cache-Control": "no-cache",
+        Connection: "keep-alive",
       },
     });
   } catch (error) {
-    console.error('Chat API error:', error);
-    return new Response(JSON.stringify({ error: 'Internal server error' }), {
+    console.error("Chat API error:", error);
+    return new Response(JSON.stringify({ error: "Internal server error" }), {
       status: 500,
-      headers: { 'Content-Type': 'application/json' },
+      headers: { "Content-Type": "application/json" },
     });
   }
 }

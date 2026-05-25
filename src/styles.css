@@ -6,6 +6,8 @@
 
 :root {
   --radius: 1rem;
+  --font-display: var(--font-display-next, "Archivo"), system-ui, sans-serif;
+  --font-sans: var(--font-sans-next, "Manrope"), system-ui, sans-serif;
 
   --background: #ffffff;
   --foreground: #000000;

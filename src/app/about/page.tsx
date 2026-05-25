@@ -1,29 +1,29 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { ArrowRight, Heart, Target, Sparkles, Shield } from 'lucide-react';
-import { Reveal } from '@/components/Reveal';
+import Link from "next/link";
+import { ArrowRight, Heart, Target, Sparkles, Shield } from "lucide-react";
+import { Reveal } from "@/components/Reveal";
 
 const values = [
   {
     icon: Heart,
-    title: 'Craft first',
-    body: 'Beautiful code, beautiful interfaces. We sweat the details others skip.',
+    title: "Craft first",
+    body: "Beautiful code, beautiful interfaces. We sweat the details others skip.",
   },
   {
     icon: Target,
-    title: 'Outcomes over output',
+    title: "Outcomes over output",
     body: "Pretty doesn't pay rent. We measure success by your business metrics.",
   },
   {
     icon: Sparkles,
-    title: 'Calm communication',
-    body: 'Weekly demos, no surprises, no jargon. You always know what\'s next.',
+    title: "Calm communication",
+    body: "Weekly demos, no surprises, no jargon. You always know what's next.",
   },
   {
     icon: Shield,
-    title: 'Built to last',
-    body: 'Maintainable architectures and clear documentation. Future-you will thank us.',
+    title: "Built to last",
+    body: "Maintainable architectures and clear documentation. Future-you will thank us.",
   },
 ];
 
