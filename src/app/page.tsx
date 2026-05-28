@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
 import {
   motion,
@@ -26,6 +26,10 @@ import {
   siWordpress,
   type SimpleIcon,
 } from "simple-icons";
+import atlasAutomationImage from "@/assets/case-studies/atlas-automation-ai.jpg";
+import civicPortalImage from "@/assets/case-studies/civic-portal-ai.jpg";
+import northwindRetailImage from "@/assets/case-studies/northwind-retail-ai.jpg";
+import verdeShopifyImage from "@/assets/case-studies/verde-shopify-ai.jpg";
 import heroResponsiveDevices from "@/assets/hero-responsive-devices.png";
 import { Reveal } from "@/components/Reveal";
 import ServiceFlipCard from "@/components/ui/flip-card";
@@ -69,6 +73,33 @@ const heroSignals = [
 ];
 
 const featuredCaseStudies = caseStudies.slice(0, 4);
+
+const caseStudyVisuals: Partial<
+  Record<
+    CaseStudy["slug"],
+    {
+      alt: string;
+      src: StaticImageData;
+    }
+  >
+> = {
+  "atlas-automation": {
+    alt: "A logistics automation dashboard on a laptop surrounded by parcels, shipping forms, and a scanner.",
+    src: atlasAutomationImage,
+  },
+  "civic-portal": {
+    alt: "A citizen services portal displayed across a laptop and tablet in a bright civic office setting.",
+    src: civicPortalImage,
+  },
+  "northwind-retail": {
+    alt: "An inventory dashboard on a laptop next to a barcode scanner in a retail stockroom.",
+    src: northwindRetailImage,
+  },
+  "verde-shopify": {
+    alt: "A home and garden storefront shown on a laptop and phone surrounded by styled decor objects.",
+    src: verdeShopifyImage,
+  },
+};
 
 export default function HomePage() {
   const heroRef = useRef<HTMLElement>(null);
@@ -340,7 +371,7 @@ export default function HomePage() {
 
       {/* FEATURED CASE STUDIES */}
       <section className="border-y border-border bg-secondary">
-        <MobileCaseStudyStack studies={featuredCaseStudies} />
+        <ResponsiveCaseStudyStack studies={featuredCaseStudies} />
         <DesktopCaseStudyStack studies={featuredCaseStudies} />
       </section>
 
@@ -438,7 +469,7 @@ function BrandIcon({ icon, color }: TechLogo) {
   );
 }
 
-function MobileCaseStudyStack({ studies }: { studies: CaseStudy[] }) {
+function ResponsiveCaseStudyStack({ studies }: { studies: CaseStudy[] }) {
   const sectionRef = useRef<HTMLElement>(null);
   const prefersReducedMotion = useReducedMotion() ?? false;
   const { scrollYProgress } = useScroll({
@@ -447,46 +478,50 @@ function MobileCaseStudyStack({ studies }: { studies: CaseStudy[] }) {
   });
 
   return (
-    <section
-      ref={sectionRef}
-      className="mx-auto max-w-7xl px-6 pt-20 pb-10 lg:hidden"
-      style={{ height: `calc(${studies.length} * 52svh + 16rem)` }}
-    >
-      <div className="sticky top-20">
-        <div className="flex flex-wrap items-end justify-between gap-6">
+    <section className="mx-auto max-w-7xl px-6 py-20 xl:hidden">
+      <Reveal>
+        <div className="max-w-2xl">
           <div className="max-w-xl">
             <p className="section-kicker">Selected work</p>
-            <h2 className="mt-4 text-3xl font-display font-semibold tracking-tight">
+            <h2 className="mt-4 text-3xl font-display font-semibold tracking-tight md:text-4xl">
               Outcomes our clients can measure.
             </h2>
             <p className="mt-5 text-base leading-8 text-muted-foreground">
-              Each engagement is built around a business problem first, then designed and engineered
-              to solve it cleanly.
+              Scroll through the featured work with a card stack that stays clean on phone and
+              tablet screens, while keeping every action in reach.
             </p>
           </div>
         </div>
+      </Reveal>
 
-        <Link
-          href="/projects"
-          className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary transition hover:gap-3"
-        >
-          All case studies <ArrowRight size={15} />
-        </Link>
+      <Link
+        href="/projects"
+        className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-primary transition hover:gap-3"
+      >
+        All case studies <ArrowRight size={15} />
+      </Link>
 
-        <div className="relative mt-7 h-[25.5rem] overflow-visible sm:h-[26rem]">
-          {studies.map((study, index) => (
-            <StackedCaseStudyDeckCard
-              key={study.slug}
-              study={study}
-              index={index}
-              total={studies.length}
-              progress={scrollYProgress}
-              reducedMotion={prefersReducedMotion}
-              mobile
-            />
-          ))}
+      <section
+        ref={sectionRef}
+        className="relative mt-10"
+        style={{ height: `calc(${studies.length} * 74svh + 8rem)` }}
+      >
+        <div className="sticky top-0 flex h-svh items-center justify-center">
+          <div className="relative mx-auto h-[clamp(31rem,74svh,40rem)] w-full max-w-[44rem] overflow-visible md:h-[clamp(33rem,72svh,42rem)]">
+            {studies.map((study, index) => (
+              <StackedCaseStudyDeckCard
+                key={study.slug}
+                study={study}
+                index={index}
+                total={studies.length}
+                progress={scrollYProgress}
+                reducedMotion={prefersReducedMotion}
+                mobile
+              />
+            ))}
+          </div>
         </div>
-      </div>
+      </section>
     </section>
   );
 }
@@ -502,7 +537,7 @@ function DesktopCaseStudyStack({ studies }: { studies: CaseStudy[] }) {
   return (
     <section
       ref={sectionRef}
-      className="mx-auto hidden max-w-7xl grid-cols-[minmax(280px,0.38fr)_minmax(0,0.62fr)] gap-12 px-6 py-24 lg:grid"
+      className="mx-auto hidden max-w-7xl grid-cols-[minmax(280px,0.38fr)_minmax(0,0.62fr)] gap-12 px-6 py-24 xl:grid"
       style={{ height: `calc(${studies.length} * 56svh + 10rem)` }}
     >
       <div className="sticky top-28 h-fit self-start">
@@ -572,47 +607,75 @@ function CaseStudyStoryCard({
         "group overflow-hidden rounded-[1.9rem] border border-border bg-card shadow-card",
         interactive ? "pointer-events-auto" : "pointer-events-none",
         mobile
-          ? "flex h-full w-full flex-col"
+          ? "mx-auto flex h-[clamp(31rem,74svh,40rem)] w-full max-w-[44rem] flex-col"
           : "grid h-[clamp(31rem,66vh,36rem)] w-full max-w-[54rem] grid-cols-[minmax(0,1.08fr)_minmax(300px,0.92fr)]",
       ].join(" ")}
     >
-      <CaseStudyVisual study={study} index={index} compact={mobile} />
+      <CaseStudyVisual study={study} index={index} compact={mobile} showOverlay={!mobile} />
 
       <div
-        className={["flex flex-1 flex-col justify-between", mobile ? "p-5" : "p-8 xl:p-10"].join(
-          " ",
-        )}
+        className={[
+          "flex flex-1 flex-col justify-between",
+          mobile ? "p-5 sm:p-6" : "p-8 xl:p-10",
+        ].join(" ")}
       >
         <div>
-          {!mobile && (
-            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-primary">
-              Case study 0{index + 1}
+          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-primary">
+            Case study 0{index + 1}
+          </p>
+
+          {mobile && (
+            <p className="mt-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+              {study.industry} / {study.client}
             </p>
           )}
 
           <h3
             className={[
               "font-display font-semibold leading-tight text-foreground",
-              mobile ? "text-[1.75rem]" : "text-[2rem] xl:text-[2.45rem]",
+              mobile ? "mt-3 text-[1.6rem] sm:text-[1.85rem]" : "text-[2rem] xl:text-[2.45rem]",
               mobile ? "" : "mt-4 max-w-md",
             ].join(" ")}
           >
             {study.title}
           </h3>
 
-          {!mobile && (
-            <p className="mt-4 max-w-md overflow-hidden text-sm leading-7 text-muted-foreground [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3]">
-              {study.summary}
-            </p>
+          <p
+            className={[
+              "overflow-hidden text-sm leading-7 text-muted-foreground [display:-webkit-box] [-webkit-box-orient:vertical]",
+              mobile ? "mt-3 [-webkit-line-clamp:4]" : "mt-4 max-w-md [-webkit-line-clamp:3]",
+            ].join(" ")}
+          >
+            {study.summary}
+          </p>
+
+          {mobile && (
+            <div className="mt-4 flex flex-wrap gap-2">
+              {study.services.slice(0, 2).map((service) => (
+                <span
+                  key={service}
+                  className="rounded-full border border-border bg-secondary/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground"
+                >
+                  {service}
+                </span>
+              ))}
+            </div>
           )}
         </div>
 
         <div
           className={[
             "border-t border-border pt-4",
-            mobile ? "mt-5 flex justify-end" : "mt-6 flex",
+            mobile
+              ? "mt-5 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between"
+              : "mt-6 flex",
           ].join(" ")}
         >
+          {mobile && (
+            <div className="text-sm font-medium text-muted-foreground">
+              {study.metrics[0].value} {study.metrics[0].label}
+            </div>
+          )}
           <div className="inline-flex items-center gap-2 text-sm font-semibold text-foreground transition group-hover:text-primary">
             Learn more <ArrowUpRight size={15} />
           </div>
@@ -694,76 +757,109 @@ function CaseStudyVisual({
   study,
   index,
   compact = false,
+  showOverlay = true,
 }: {
   study: CaseStudy;
   index: number;
   compact?: boolean;
+  showOverlay?: boolean;
 }) {
+  const visual = caseStudyVisuals[study.slug];
+
   return (
     <div
       className={[
-        `relative overflow-hidden border-border ${study.cover}`,
-        compact ? "h-56 border-b" : "h-full border-r",
+        `relative overflow-hidden border-border ${visual ? "bg-neutral-100" : study.cover}`,
+        compact ? "aspect-[16/10] border-b sm:aspect-[16/9]" : "h-full min-h-[22rem] border-r",
       ].join(" ")}
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.82),transparent_38%),linear-gradient(180deg,rgba(255,255,255,0.12),rgba(255,255,255,0.74))]" />
+      {visual ? (
+        <>
+          <Image
+            src={visual.src}
+            alt={visual.alt}
+            fill
+            sizes={
+              compact
+                ? "(max-width: 767px) calc(100vw - 3rem), (max-width: 1279px) calc(50vw - 2.5rem), 40vw"
+                : "(min-width: 1280px) 32rem, 100vw"
+            }
+            className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.03]"
+          />
+          {showOverlay && (
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(15,15,15,0.08)_0%,rgba(15,15,15,0.08)_34%,rgba(15,15,15,0.62)_100%)]" />
+          )}
+        </>
+      ) : (
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.82),transparent_38%),linear-gradient(180deg,rgba(255,255,255,0.12),rgba(255,255,255,0.74))]" />
+      )}
 
-      <div className="absolute inset-x-5 top-5 flex items-start justify-between gap-4">
-        <div>
-          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-            {study.industry}
-          </p>
-          <p className="mt-1 text-sm font-semibold text-foreground">{study.client}</p>
-        </div>
-
-        <span className="rounded-full border border-black/10 bg-white/92 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-foreground/80">
-          0{index + 1}
-        </span>
-      </div>
-
-      <div className={compact ? "absolute inset-x-4 bottom-4" : "absolute inset-x-6 bottom-6"}>
-        <div
-          className={[
-            "screen-panel border border-black/10",
-            compact ? "rounded-[1.25rem] p-3.5" : "rounded-[1.6rem] p-5",
-          ].join(" ")}
-        >
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <span className="h-2.5 w-2.5 rounded-full bg-primary" />
-              <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                Software preview
-              </span>
+      {showOverlay && (
+        <>
+          <div className="absolute inset-x-5 top-5 flex items-start justify-between gap-4">
+            <div>
+              <p
+                className={[
+                  "text-[11px] font-semibold uppercase tracking-[0.22em]",
+                  visual ? "text-white/72" : "text-muted-foreground",
+                ].join(" ")}
+              >
+                {study.industry}
+              </p>
+              <p
+                className={[
+                  "mt-1 text-sm font-semibold",
+                  visual ? "text-white" : "text-foreground",
+                ].join(" ")}
+              >
+                {study.client}
+              </p>
             </div>
-            <div className="h-2 w-14 rounded-full bg-black/8" />
+
+            <span
+              className={[
+                "rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em]",
+                visual
+                  ? "border border-white/18 bg-white/14 text-white backdrop-blur-md"
+                  : "border border-black/10 bg-white/92 text-foreground/80",
+              ].join(" ")}
+            >
+              0{index + 1}
+            </span>
           </div>
 
-          <div className="mt-4 grid gap-3">
-            <div className="grid grid-cols-[1.15fr_0.85fr] gap-3">
-              <div className="rounded-[1rem] bg-white/94 p-3">
-                <div className="h-2.5 w-20 rounded-full bg-primary/18" />
-                <div className="mt-3 h-2.5 w-full rounded-full bg-black/8" />
-                <div className="mt-2 h-2.5 w-3/4 rounded-full bg-black/8" />
+          <div className={compact ? "absolute inset-x-4 bottom-4" : "absolute inset-x-6 bottom-6"}>
+            <div
+              className={[
+                "max-w-[18rem] rounded-[1.35rem] border border-white/18 bg-black/28 p-3.5 text-white shadow-[0_18px_40px_rgba(0,0,0,0.18)] backdrop-blur-md",
+                compact ? "max-w-[16rem]" : "sm:max-w-[19rem]",
+              ].join(" ")}
+            >
+              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/70">
+                Measured outcome
+              </p>
+              <div className="mt-2 flex items-end gap-3">
+                <span className="text-2xl font-display font-semibold leading-none">
+                  {study.metrics[0].value}
+                </span>
+                <span className="pb-0.5 text-xs font-medium text-white/78">
+                  {study.metrics[0].label}
+                </span>
               </div>
-              <div className="rounded-[1rem] bg-white/90 p-3">
-                <div className="h-10 rounded-[0.9rem] bg-gradient-to-br from-primary/16 via-white to-primary/8" />
-                <div className="mt-3 h-2.5 w-12 rounded-full bg-black/8" />
-              </div>
-            </div>
-
-            <div className="rounded-[1rem] bg-white/92 p-3">
-              <div className="flex items-end gap-2">
-                <span className="h-8 w-3 rounded-full bg-primary/25" />
-                <span className="h-12 w-3 rounded-full bg-primary/35" />
-                <span className="h-6 w-3 rounded-full bg-black/10" />
-                <span className="h-10 w-3 rounded-full bg-primary/22" />
-                <span className="h-14 w-3 rounded-full bg-primary/42" />
-                <span className="h-7 w-3 rounded-full bg-black/10" />
+              <div className="mt-3 flex flex-wrap gap-2">
+                {study.services.slice(0, 2).map((service) => (
+                  <span
+                    key={service}
+                    className="rounded-full border border-white/16 bg-white/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white/82"
+                  >
+                    {service}
+                  </span>
+                ))}
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        </>
+      )}
     </div>
   );
 }
